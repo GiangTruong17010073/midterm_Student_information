@@ -15,10 +15,10 @@ public class MainActivity extends AppCompatActivity {
     EditText mEdtFullname,mEdtAge, mEdtAddress;
     Button mBtnAdd;
     ListView lvResult;
-    String name, age, address;
     ArrayList<String> arrayResults;
     ArrayAdapter<String> adapter;
-    private String result;
+    String age, name, address;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void add(View v){
-        result = mEdtFullname.toString() + mEdtAge.toString() + mEdtAddress.toString();
         name = mEdtFullname.getText().toString();
         address = mEdtAddress.getText().toString();
         age = mEdtAge.getText().toString();
@@ -46,6 +45,15 @@ public class MainActivity extends AppCompatActivity {
         mEdtAddress.setText(null);
         mEdtAge.setText(null);
         mEdtFullname.setText(null);
+
+        String stringResult = "name: " + name + "\n" + "Age: " + age + "\n" + "Address: " + address;
+        arrayResults.add(0, stringResult);
+        adapter.notifyDataSetChanged();
+
+
+        arrayResults = new ArrayList<String>();
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayResults);
 
     }
 }
